@@ -1,0 +1,65 @@
+
+services:
+  postgres-db:
+    image: postgres:18-alpine    #check what version your database is using locally
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dbname
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql #Named Docker Volume
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d dbname"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      
+  backend:
+    build: ./backend
+    container_name: developers-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres-db:5432/dbname
+    volumes:
+      - ./backend:/app  #Bind Mount used here
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+
+
+  frontend:
+    build: ./frontend
+    container_name: developers-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:   #Top-Level Named Docker Volume Registration
+
+
+
+
+
+
+# services:
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "8000:8000"  #HOST:CONTAINER Left side is the port on your actual Windows machine; right side is the port inside the container
+#     volumes:
+#       - ./backend/test-quote.db:/app/test-quote.db
+
+#   frontend:
+#     build: ./frontend 
+#     ports:
+#       - "5173:5173"
+#     depends_on:
+#       - backend
+ 
