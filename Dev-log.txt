@@ -1,12 +1,24 @@
 
+
 Developer logs:
 
 containerization of backend, frontend and Database: Done
 PostgreSQL establishment: Done
 
-Next:
-Connect to GitHUB
-Learn more about GitHub Container Registry (GHCR) for image Registry
+Steps for from local to Azure:
+✅Connect to GitHUB -done
+✅Learn more about GitHub Container Registry (GHCR) for image Registry-done
+✅Create Personal Access token in GHCR
+✅Login to GHCR via terminal:
+echo "PAT_TOKEN" | docker login ghcr.io -u GITHUB_USERNAME --password-stdin
+✅Build and push backend, frontend and DB images
+✅Log into Azure & Create Your AKS Cluster
+✅Create kubernetes manifests in seperate folder in root folder. Name of manifest file: deployment.yml
+✅Apply Deployment: kubectl apply file
+✅Check pods and get external ip to check to website
+kubectl get pods
+kubectl get svc frontend-service
+✅Enable historical logs in Azure monitor
 
 
-
+Steps for from local to Hetzner
