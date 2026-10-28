@@ -1,4 +1,7 @@
 {$SITE_ADDRESS} {
+	log {
+		format console
+	}
 	encode gzip
 
 	handle_path /api/* {
