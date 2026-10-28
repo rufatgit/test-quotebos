@@ -38,7 +38,7 @@ export default function Navbar({
             onLogoClick();
           }}
         >
-          <button>Authors</button>
+          <button>Authorss</button>
         </Link>
         <Link
           to="/collections"
