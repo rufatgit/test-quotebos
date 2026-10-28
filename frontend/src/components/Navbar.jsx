@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../Navbar.css";
-import logo2 from "../assets/quotivus-logo.png";
+import logo2 from "../assets/quotivus-logo2.png";
 
 export default function Navbar({
   onSearch,
